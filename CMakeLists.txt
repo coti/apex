@@ -724,6 +724,23 @@ if((DEFINED MSR_ROOT) OR (USE_MSR))
 endif()
 
 ################################################################################
+# StarPU configuration
+################################################################################
+
+if((DEFINED STARPU_ROOT) OR (APEX_WITH_STARPU)  OR (USE_STARPU))
+    find_package(STARPU)
+    if(NOT STARPU_FOUND)
+        message(FATAL_ERROR " Requested USE_STARPU but could not find StarPU; set STARPU_ROOT")
+    endif()
+    message(INFO " Using StarPU: ${STARPU_LIBRARY_DIR} ${STARPU_LIBRARIES}")
+    include_directories(${STARPU_INCLUDE_DIR})
+    set(LIBS ${LIBS} ${STARPU_LIBRARIES})
+    if (NOT BUILD_STATIC_EXECUTABLES)
+        set(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_RPATH} ${STARPU_LIBRARY_DIR})
+    endif()
+endif()
+
+################################################################################
 # Binutils configuration
 ################################################################################
 
