@@ -61,6 +61,10 @@ if (APEX_WITH_RAJA AND RAJA_FOUND)
     set(RAJA_SOURCE apex_raja.cpp)
 endif (APEX_WITH_RAJA AND RAJA_FOUND)
 
+if (APEX_WITH_STARPU AND STARPU_FOUND)
+    set(STARPU_SOURCE apex_starpu.cpp)
+endif (APEX_WITH_STARPU AND STARPU_FOUND)
+
 # Try to keep this in alphabetical order
 SET(all_SOURCE
 ${CUPTI_SOURCE}
@@ -90,6 +94,7 @@ profile_reducer.cpp
 profiler_listener.cpp
 ${SENSOR_SOURCE}
 simulated_annealing.cpp
+${STARPU_SOURCE}
 task_identifier.cpp
 tcmalloc_hooks.cpp
 ${tau_SOURCE}
